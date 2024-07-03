@@ -3,12 +3,12 @@
 
 ## Features
 
-1. **Reading Various File Formats**
-2. **Directory and ZIP File Handling**
-3. **Data Joining**
-4. **Deduplication**
-5. **Custom Filters**
-6. **Logging**
+1. **Reading Various File Formats**: Suporta leitura de arquivos CSV, JSON, Parquet e Excel.
+2. **Directory and ZIP File Handling**: Capacidade de ler dados de diretórios e arquivos ZIP, além de bytes e objetos `zipfile.ZipFile`.
+3. **Data Joining**: União de DataFrames que possuem colunas semelhantes.
+4. **Deduplication**: Remoção de duplicatas com base em colunas específicas.
+5. **Custom Filters**: Aplicação de filtros personalizados aos DataFrames.
+6. **Logging**: Registro detalhado das operações de leitura e manipulação de dados.
 
 ## Installation Requirements
 
@@ -38,6 +38,21 @@ data = data_reader.read_data('path/to/directory', join_similar=True)
 
 ```python
 data = data_reader.read_data('path/to/zipfile.zip', join_similar=False)
+```
+
+#### From Bytes
+
+```python
+with open('path/to/zipfile.zip', 'rb') as f:
+    zip_bytes = f.read()
+data = data_reader.read_data(zip_bytes, join_similar=False)
+```
+
+#### From \`zipfile.ZipFile\` Object
+
+```python
+with zipfile.ZipFile('path/to/zipfile.zip', 'r') as zip_file:
+    data = data_reader.read_data(zip_file, join_similar=False)
 ```
 
 ### Applying Deduplication
@@ -74,7 +89,7 @@ except FilterConfigurationError:
 ```python
 data_reader = DataReader()
 
-data = data_reader.read_data(r'C:\path\to\data', join_similar=True,
+data = data_reader.read_data(r'C:\path	o\data', join_similar=True,
                              filter_subset={'example_file': [{'column': 'Age', 'operation': '>', 'values': 30}]})
 ```
 
@@ -92,18 +107,19 @@ data = data_reader.read_data(r'C:\path\to\data', join_similar=True,
 1. **Make Your Changes**: Implement your feature, fix a bug, or make your proposed changes. Ensure your code adheres to the project's coding standards and guidelines.
 2. **Test Your Changes**: Before submitting, test your changes thoroughly. Write unit tests if applicable, and ensure all existing tests pass.
 3. **Document Your Changes**: Update the documentation to reflect your changes. If you're adding a new feature, include usage examples.
-Push your changes to your fork on GitHub.
 4. **Commit Your Changes**: Make concise and clear commit messages, describing what each commit does.
 5. **Push to Your Fork**: Push your changes to your fork on GitHub.
-6. **Create a Pull Request (PR)**: Go to the original `DataReader` repository and create a pull request from your fork. Ensure you describe your changes in detail and link any relevant issues.
+6. **Create a Pull Request (PR)**: Go to the original \`DataReader\` repository and create a pull request from your fork. Ensure you describe your changes in detail and link any relevant issues.
 
 ### Review Process
+
 After submitting your PR, the maintainers will review your changes. Be responsive to feedback:
 
 1. **Respond to Comments**: If the reviewers ask for changes, make them promptly. Discuss any suggestions or concerns.
 2. **Update Your PR**: If needed, update your PR based on feedback. This may involve adding more tests or tweaking your approach.
 
 ### Final Steps
+
 Once your PR is approved:
 
 1. **Merge**: The maintainers will merge your changes into the main codebase.
@@ -111,4 +127,4 @@ Once your PR is approved:
 
 ## Conclusion
 
-Contributing to `DataReader` is a rewarding experience that benefits the entire user community. Your contributions help make `DataReader` a more robust and versatile tool. We welcome developers of all skill levels and appreciate every form of contribution, from code to documentation. Thank you for considering contributing to `DataReader`!
+Contributing to \`DataReader\` is a rewarding experience that benefits the entire user community. Your contributions help make \`DataReader\` a more robust and versatile tool. We welcome developers of all skill levels and appreciate every form of contribution, from code to documentation. Thank you for considering contributing to \`DataReader\`!
